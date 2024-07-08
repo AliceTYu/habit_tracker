@@ -9,6 +9,16 @@ let habbits = [{
             {"comment": "Первый подход всегда тяжело"},
             {"comment": "Второй уже легче"}
         ]
+    },{
+        "id": 2,
+        "icon": "water",
+        "name": "Вода",
+        "target": 3,
+        "days": [
+            {"comment": "Пью 1ый день - 1л."},
+            {"comment": "2л."},
+            {"comment": "1.5л."}
+        ]
     }]
 const HABIT_KEY = 'HABIT_KEY'
 let globalActiveHabbitId
@@ -130,7 +140,6 @@ function rerenderComment(activeHabbit){
     page.content.dayContainer.innerHTML = ''
     for (const index in activeHabbit.days){
         if (Number(activeHabbit.target) <= Number(index) + 1){
-            console.log('true')
             add_btn.style.display = 'none'
             const element = document.createElement('div')
             element.classList.add('habbit')
