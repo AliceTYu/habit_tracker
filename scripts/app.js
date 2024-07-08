@@ -125,19 +125,36 @@ function rerenderHeader(activeHabbit){
     page.header.progressCoverBar.setAttribute('style', `width: ${progress}%`)
 }
 
+const add_btn = document.querySelector('.habbit')
 function rerenderComment(activeHabbit){
     page.content.dayContainer.innerHTML = ''
     for (const index in activeHabbit.days){
-        const element = document.createElement('div')
-        element.classList.add('habbit')
-        element.innerHTML = `
-            <div class="habbit__day">День ${Number(index) + 1}</div>
-            <div class="habbit__comment">${activeHabbit.days[index].comment}</div>
-            <button class="habbit__delete" onclick="removeDays(${index})">
-                <img src="./images/del.svg" alt="Удалить день ${index + 1}" />
-            </button>
-        `
-        page.content.dayContainer.appendChild(element)
+        if (Number(activeHabbit.target) <= Number(index) + 1){
+            console.log('true')
+            add_btn.style.display = 'none'
+            const element = document.createElement('div')
+            element.classList.add('habbit')
+            element.innerHTML = `
+                <div class="habbit__day">День ${Number(index) + 1}</div>
+                <div class="habbit__comment">${activeHabbit.days[index].comment}</div>
+                <button class="habbit__delete" onclick="removeDays(${index})">
+                    <img src="./images/del.svg" alt="Удалить день ${index + 1}" />
+                </button>
+            `
+            page.content.dayContainer.appendChild(element)
+        } else {
+            add_btn.style.display = 'flex'
+            const element = document.createElement('div')
+            element.classList.add('habbit')
+            element.innerHTML = `
+                <div class="habbit__day">День ${Number(index) + 1}</div>
+                <div class="habbit__comment">${activeHabbit.days[index].comment}</div>
+                <button class="habbit__delete" onclick="removeDays(${index})">
+                    <img src="./images/del.svg" alt="Удалить день ${index + 1}" />
+                </button>
+            `
+            page.content.dayContainer.appendChild(element)
+        }
     }
     page.content.nextDay.innerHTML = `День ${activeHabbit.days.length + 1}`
 }
